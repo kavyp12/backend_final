@@ -396,6 +396,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { Brain } from 'lucide-react'; // Ensure the correct path
 
 export const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -434,9 +435,22 @@ export const Signup: React.FC = () => {
   };
 
   return (
-    <section className="bg-gray-50 min-screen flex items-center justify-center" style={{ width: '100vw', height: '100vh' }}>
+    <section className="bg-gray-50 min-screen flex items-center justify-center" style={{ width: '100vw', height: '100vh',margin: '0px', padding: '0px' }}>
       <div className="bg-gray-100 flex rounded-2xl shadow-lg w-full max-w-4xl mx-4 p-5 items-center">
         <div className="w-full px-8 md:px-16">
+          {/* Logo Section */}
+          <div className="flex justify-center mb-6">
+            <div className="flex items-center space-x-3 group">
+              <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 rounded-xl shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                <Brain className="w-6 h-6 text-white transform transition-transform duration-300 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-white opacity-20 rounded-xl group-hover:opacity-0 transition-opacity duration-300"></div>
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-transparent bg-clip-text transform transition-all duration-300 group-hover:scale-105">
+                Career Guide AI
+              </span>
+            </div>
+          </div>
+
           <h2 className="font-bold text-2xl text-[#002D74]">Create Account</h2>
           <p className="text-xs mt-4 text-[#002D74]">
             Please fill in the information below to create your account
@@ -558,8 +572,6 @@ export const Signup: React.FC = () => {
             </button>
           </form>
 
-          
-
           <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
             <p>Already have an account?</p>
             <Link to="/login">
@@ -568,14 +580,6 @@ export const Signup: React.FC = () => {
               </button>
             </Link>
           </div>
-        </div>
-
-        <div className="md:block hidden w-1/2">
-          <img
-            className="rounded-2xl h-96"
-            src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8&auto=format&fit=crop&w=1887&q=80"
-            alt="Login Illustration"
-          />
         </div>
       </div>
     </section>

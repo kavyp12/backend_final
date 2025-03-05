@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Download, CheckCircle, AlertCircle } from 'lucide-react';
+import { Download, CheckCircle, AlertCircle, Menu, X } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const { user, logout } = useAuth();
   const [status, setStatus] = useState('Pending');
   const [reportPath, setReportPath] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchReportStatus = async () => {
@@ -54,7 +55,7 @@ const Dashboard: React.FC = () => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = reportPath; // Use the reportPath as the filename
+      a.download = reportPath;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -68,40 +69,76 @@ const Dashboard: React.FC = () => {
   const isReportAvailable = status === 'Report Generated';
 
   return (
-    <div className="min-h-screen bg-gray-100" style={{ height: '100vh', width: '100vw' }}>
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <h1 className="text-xl font-bold text-gray-900">Career Guidance Platform</h1>
-            </div>
-            <div className="flex items-center">
-              <button
-                onClick={logout}
-                className="ml-4 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
-              >
-                Logout
-              </button>
+    <div 
+      className="fixed inset-0 bg-gray-100 overflow-auto"
+      style={{ 
+        width: '100vw', 
+        height: '100vh',
+        margin: 0,
+        padding: 0
+      }}
+    >
+      {/* Mobile Navigation */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+        <div className="flex justify-between items-center p-4">
+          <h1 className="text-xl font-bold text-gray-900">Career Guidance</h1>
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="focus:outline-none"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+        {isMobileMenuOpen && (
+          <div className="absolute top-full left-0 right-0 bg-white shadow-lg">
+            <button
+              onClick={logout}
+              className="w-full text-left px-4 py-3 hover:bg-gray-100 border-t"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Content Container */}
+      <div className="pt-16 md:pt-0 max-h-screen overflow-y-auto">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block bg-white shadow">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center">
+                <h1 className="text-xl font-bold text-gray-900">Career Guidance Platform</h1>
+              </div>
+              <div className="flex items-center">
+                <button
+                  onClick={logout}
+                  className="ml-4 px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-md transition-colors duration-300 ease-in-out"
+                >
+                  Logout
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
+        <main className="container mx-auto px-4 py-8 md:pt-16">
+          {/* Welcome Section */}
           <div className="relative bg-gradient-to-r from-indigo-600 to-indigo-900 shadow-xl rounded-2xl overflow-hidden mb-8">
             <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10" />
-            <div className="relative p-8">
+            <div className="relative p-6 md:p-8">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                  <h2 className="text-3xl font-bold text-white mb-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                     Welcome, {user?.firstName} {user?.lastName}
                   </h2>
-                  <p className="text-indigo-200">Track your career assessment progress</p>
+                  <p className="text-indigo-200 text-sm md:text-base">
+                    Track your career assessment progress
+                  </p>
                 </div>
                 <div className="flex items-center">
                   <span
-                    className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium shadow-lg transition-all duration-300 transform hover:scale-105 ${
+                    className={`inline-flex items-center px-4 py-2 rounded-full text-xs md:text-sm font-medium shadow-lg transition-all duration-300 transform hover:scale-105 ${
                       isReportAvailable
                         ? 'bg-green-500 text-white'
                         : status === 'Analyzing'
@@ -113,22 +150,22 @@ const Dashboard: React.FC = () => {
                   >
                     {isReportAvailable ? (
                       <>
-                        <CheckCircle className="h-5 w-5 mr-2" />
+                        <CheckCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
                         Report Ready
                       </>
                     ) : status === 'Analyzing' ? (
                       <>
-                        <AlertCircle className="h-5 w-5 mr-2" />
+                        <AlertCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
                         Analyzing Results
                       </>
                     ) : status === 'Error' ? (
                       <>
-                        <AlertCircle className="h-5 w-5 mr-2" />
+                        <AlertCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
                         Processing Failed
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="h-5 w-5 mr-2" />
+                        <AlertCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
                         {status}
                       </>
                     )}
@@ -138,17 +175,18 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white shadow-xl rounded-2xl overflow-hidden p-8">
+          {/* Assessment Status Section */}
+          <div className="bg-white shadow-xl rounded-2xl overflow-hidden p-6 md:p-8">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-900">Assessment Status</h3>
+              <h3 className="text-lg md:text-xl font-bold text-gray-900">Assessment Status</h3>
             </div>
 
             <div className="space-y-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-medium text-gray-600">Current Status</p>
+                  <p className="text-xs md:text-sm font-medium text-gray-600">Current Status</p>
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    className={`px-3 py-1 rounded-full text-xs md:text-sm font-medium ${
                       status === 'Analyzing'
                         ? 'bg-yellow-100 text-yellow-800'
                         : status === 'Report Generated'
@@ -170,7 +208,7 @@ const Dashboard: React.FC = () => {
                         ? 'w-1/2 bg-yellow-500'
                         : status === 'Report Generated'
                         ? 'w-full bg-green-500'
-                        : 'w-3/4 bg-red-500' // Error case
+                        : 'w-3/4 bg-red-500'
                     }`}
                   />
                 </div>
@@ -227,8 +265,8 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

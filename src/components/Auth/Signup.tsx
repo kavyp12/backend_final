@@ -570,7 +570,7 @@ export const Signup: React.FC = () => {
         <div className="md:block hidden w-1/2">
           <img
             className="rounded-2xl w-full h-auto object-contain"
-            src="/images/3551.jpg"
+            src="/image/3551.jpg"
             alt="Knowledge is Power Illustration"
           />
         </div>

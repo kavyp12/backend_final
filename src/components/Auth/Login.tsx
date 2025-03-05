@@ -212,12 +212,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-// Ensure you import the Brain component if it isn't already
-import { Brain } from 'lucide-react'; 
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, token } = useAuth(); // Use token from AuthContext
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -234,10 +232,29 @@ const Login: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    
+
     try {
+      // Perform login
       await login(formData.email, formData.password);
-      navigate('/dashboard');
+
+      // Fetch report status after login
+      const response = await fetch(`${import.meta.env.VITE_API_BASE || 'https://api.enhc.tech/api'}/questionnaire/report-status`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to fetch report status');
+      }
+
+      const statusData = await response.json();
+
+      // Redirect based on report status
+      if (statusData.status === 'Report Generated') {
+        navigate('/dashboard');
+      } else {
+        navigate('/add-marks'); // Redirect to marks entry if report not generated
+      }
     } catch (err: any) {
       console.error('Login error:', err);
       if (err.response) {
@@ -245,7 +262,7 @@ const Login: React.FC = () => {
       } else if (err.request) {
         setError('Unable to connect to server. Please try again.');
       } else {
-        setError('An error occurred. Please try again.');
+        setError(err.message || 'An error occurred. Please try again.');
       }
     } finally {
       setIsLoading(false);
@@ -253,29 +270,17 @@ const Login: React.FC = () => {
   };
 
   return (
-    <section className="bg-gray-50 min-h-screen flex items-center justify-center" style={{ width: '100vw', height: '100vh' }}>
-      <div className="bg-gray-100 flex flex-col items-center rounded-2xl shadow-lg max-w-md w-full mx-4 p-8">
-        {/* Logo Section */}
-        <div className="flex justify-center mb-6">
-          <div className="flex items-center space-x-3 group">
-            <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 rounded-xl shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-              <Brain className="w-6 h-6 text-white transform transition-transform duration-300 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-white opacity-20 rounded-xl group-hover:opacity-0 transition-opacity duration-300"></div>
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-transparent bg-clip-text transform transition-all duration-300 group-hover:scale-105">
-              Career Guide AI
-            </span>
-          </div>
-        </div>
-        <div className="w-full px-4 md:px-8">
-          <h2 className="font-bold text-2xl text-[#002D74] text-center">Login</h2>
-          <p className="text-xs mt-4 text-[#002D74] text-center">
+    <section className="bg-gray-50 min-screen flex items-center justify-center" style={{ width: '100vw', height: '100vh' }}>
+      <div className="bg-gray-100 flex rounded-2xl shadow-lg w-full max-w-4xl mx-4 p-5 items-center">
+        <div className="md:w-1/2 px-8 md:px-16">
+          <h2 className="font-bold text-2xl text-[#002D74]">Login</h2>
+          <p className="text-xs mt-4 text-[#002D74]">
             If you are already a member, easily log in
           </p>
 
-          <form className="flex flex-col gap-4 mt-6" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
             <input
-              className="p-2 rounded-xl border w-full"
+              className="p-2 rounded-xl border"
               type="email"
               name="email"
               placeholder="Email"
@@ -306,18 +311,18 @@ const Login: React.FC = () => {
               </svg>
             </div>
 
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <button
               type="submit"
-              className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300 disabled:opacity-50"
+              className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
               disabled={isLoading}
             >
               {isLoading ? "Logging in..." : "Login"}
             </button>
           </form>
 
-          <div className="mt-4 text-xs flex justify-between items-center text-[#002D74]">
+          <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
             <p>Don't have an account?</p>
             <Link to="/signup">
               <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">
@@ -325,6 +330,14 @@ const Login: React.FC = () => {
               </button>
             </Link>
           </div>
+        </div>
+
+        <div className="md:block hidden w-1/2">
+          <img
+            className="rounded-2xl"
+            src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8&auto=format&fit=crop&w=1887&q=80"
+            alt="Login Illustration"
+          />
         </div>
       </div>
     </section>

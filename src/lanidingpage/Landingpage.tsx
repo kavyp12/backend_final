@@ -13,7 +13,8 @@ import {
   BookOpen,
   Globe,
   TrendingUp,
-  DollarSign
+  DollarSign,
+  Instagram
 } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 
@@ -222,13 +223,13 @@ const Landingpage: React.FC = () => {
               {
                 name: "Rahul Patel",
                 role: "Parent",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
+                // image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
                 quote: "As a parent, I was impressed by the depth of analysis. The platform provided invaluable insights for my daughter's future in biotechnology."
               },
               {
                 name: "Anjali Desai",
                 role: "Medical Student",
-                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
+                // image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
                 quote: "The AI's personalized recommendations aligned perfectly with my interests. Now I'm confidently pursuing my dream of becoming a neurosurgeon!"
               }
             ].map((testimonial, index) => (
@@ -286,54 +287,49 @@ const Landingpage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-12">
-            <div>
-              <div className="flex items-center space-x-2 mb-6 group">
-                <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                  <Brain className="w-6 h-6 text-white transform transition-transform duration-300 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-white opacity-20 rounded-xl group-hover:opacity-0 transition-opacity duration-300"></div>
-                </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-200 text-transparent bg-clip-text transform transition-all duration-300 group-hover:scale-105">Career Guide AI</span>
-              </div>
-              <p className="text-gray-400 leading-relaxed">
-                Empowering the next generation with AI-powered career guidance and comprehensive analysis.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-              <ul className="space-y-4 text-gray-400">
-                <li className="hover:text-blue-400 transition cursor-pointer">About Us</li>
-                <li className="hover:text-blue-400 transition cursor-pointer">How It Works</li>
-                <li className="hover:text-blue-400 transition cursor-pointer">Success Stories</li>
-                <li className="hover:text-blue-400 transition cursor-pointer">FAQs</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Contact</h3>
-              <div className="space-y-4 text-gray-400">
-                <p className="flex items-center hover:text-blue-400 transition cursor-pointer">
-                  <Mail className="w-5 h-5 mr-3" />
-                  infoenhc@gmail.com
-                </p>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Connect With Us</h3>
-              <div className="flex space-x-6">
-                <Twitter className="w-6 h-6 text-gray-400 hover:text-blue-400 transition cursor-pointer" />
-                <Linkedin className="w-6 h-6 text-gray-400 hover:text-blue-400 transition cursor-pointer" />
-                <Facebook className="w-6 h-6 text-gray-400 hover:text-blue-400 transition cursor-pointer" />
-              </div>
-            </div>
+    {/* Footer */}
+<footer className="bg-gray-900 text-white py-16">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid md:grid-cols-3 gap-12">
+      <div>
+        <div className="flex items-center space-x-2 mb-6 group">
+          <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+            <Brain className="w-6 h-6 text-white transform transition-transform duration-300 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-white opacity-20 rounded-xl group-hover:opacity-0 transition-opacity duration-300"></div>
           </div>
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>© 2024 Career Guide AI. All rights reserved.</p>
-          </div>
+          <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-200 text-transparent bg-clip-text transform transition-all duration-300 group-hover:scale-105">Career Guide AI</span>
         </div>
-      </footer>
+        <p className="text-gray-400 leading-relaxed">
+          Empowering the next generation with AI-powered career guidance and comprehensive analysis.
+        </p>
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold mb-6">Contact</h3>
+        <div className="space-y-4 text-gray-400">
+          <p className="flex items-center hover:text-blue-400 transition cursor-pointer">
+            <Mail className="w-5 h-5 mr-3" />
+            infoenhc@gmail.com
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold mb-6">Connect With Us</h3>
+        <div className="flex space-x-6">
+          <a href="https://www.linkedin.com/company/105442715/admin/dashboard/" target="_blank" rel="noopener noreferrer">
+            <Linkedin className="w-6 h-6 text-gray-400 hover:text-blue-400 transition cursor-pointer" />
+          </a>
+          <a href="https://www.instagram.com/enhancemodel.ai/" target="_blank" rel="noopener noreferrer">
+            <Instagram className="w-6 h-6 text-gray-400 hover:text-blue-400 transition cursor-pointer" />
+          </a>
+        </div>
+      </div>
     </div>
+    <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+      <p>© 2024 Career Guide AI. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</div>
   );
 }
 

@@ -201,48 +201,35 @@ const Landingpage: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="py-24 bg-white">
+            {/* Testimonials */}
+            <section id="testimonials" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-blue-600 font-semibold mb-4 block">Testimonials</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Success Stories</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Hear from students and parents who transformed their career journey with Career Guide AI.
+              Hear from students and professionals who have transformed their careers with AI-powered solutions.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Priya Sharma",
-                role: "Engineering Student",
-                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-                quote: "Career Guide AI's comprehensive analysis helped me discover my passion for robotics engineering. The detailed roadmap made my career path crystal clear!"
+                name: "Ronie Sheladia",
+                role: "CEO",
+                company: "Vedcool (Webito Infotech)",
+                quote: "Learn Stream Campus's integration of AI-powered career guidance, thanks to your consulting, has been transformative. It's not just a fourth component; it's the key to unlocking our students' futures."
               },
               {
-                name: "Rahul Patel",
-                role: "Parent",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-                quote: "As a parent, I was impressed by the depth of analysis. The platform provided invaluable insights for my daughter's future in biotechnology."
-              },
-              {
-                name: "Anjali Desai",
-                role: "Medical Student",
-                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-                quote: "The AI's personalized recommendations aligned perfectly with my interests. Now I'm confidently pursuing my dream of becoming a neurosurgeon!"
+                name: "Smit Hirani",
+                role: "Owner",
+                company: "Fashion E-commerce",
+                quote: "This AI photoshoot tool has revolutionized our business! It slashed our photoshoot time from weeks to minutes, saving us significant time and money. We're now launching new styles faster than ever before."
               }
             ].map((testimonial, index) => (
               <div key={index} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 group hover:-translate-y-1">
-                <div className="flex items-center space-x-4 mb-6">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full ring-4 ring-blue-100 group-hover:ring-blue-200 transition duration-300"
-                  />
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-blue-600">{testimonial.role}</p>
-                  </div>
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold text-gray-900">{testimonial.name}</h4>
+                  <p className="text-blue-600">{testimonial.role}, {testimonial.company}</p>
                 </div>
                 <p className="text-gray-700 leading-relaxed italic">{testimonial.quote}</p>
               </div>
@@ -250,6 +237,7 @@ const Landingpage: React.FC = () => {
           </div>
         </div>
       </section>
+
 
       {/* CTA */}
       <section className="py-24 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">

@@ -392,8 +392,6 @@
 
 
 // export default Signup;
-// export default Signup;
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -571,9 +569,9 @@ export const Signup: React.FC = () => {
 
         <div className="md:block hidden w-1/2">
           <img
-            className="rounded-2xl h-96 object-cover"
-            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80"
-            alt="Career Guidance Illustration"
+            className="rounded-2xl w-full h-auto object-contain"
+            src="/images/3551.jpg"
+            alt="Knowledge is Power Illustration"
           />
         </div>
       </div>

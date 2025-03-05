@@ -392,6 +392,7 @@
 
 
 // export default Signup;
+// export default Signup;
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -558,8 +559,6 @@ export const Signup: React.FC = () => {
             </button>
           </form>
 
-          
-
           <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
             <p>Already have an account?</p>
             <Link to="/login">
@@ -571,11 +570,11 @@ export const Signup: React.FC = () => {
         </div>
 
         <div className="md:block hidden w-1/2">
-        <img
-  className="rounded-2xl h-96"
-  src="https://images.unsplash.com/photo-1519699064982-5287da37a8f6?auto=format&fit=crop&w=1887&q=80"
-  alt="Study Illustration"
-/>
+          <img
+            className="rounded-2xl h-96 object-cover"
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80"
+            alt="Career Guidance Illustration"
+          />
         </div>
       </div>
     </section>

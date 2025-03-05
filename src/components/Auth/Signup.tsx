@@ -392,6 +392,7 @@
 
 
 // export default Signup;
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -557,6 +558,8 @@ export const Signup: React.FC = () => {
             </button>
           </form>
 
+          
+
           <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
             <p>Already have an account?</p>
             <Link to="/login">
@@ -569,9 +572,9 @@ export const Signup: React.FC = () => {
 
         <div className="md:block hidden w-1/2">
           <img
-            className="rounded-2xl w-full h-auto object-contain"
-            src="/image/3551.jpg"
-            alt="Knowledge is Power Illustration"
+            className="rounded-2xl h-96"
+            src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8&auto=format&fit=crop&w=1887&q=80"
+            alt="Login Illustration"
           />
         </div>
       </div>

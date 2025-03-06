@@ -29,7 +29,7 @@ const AddMarks = () => {
           setError('Please login again');
           return;
         }
-        const response = await fetch('http://api.enhc.tech/api/marks/marks', {
+        const response = await fetch('https://api.enhc.tech/api/marks/marks', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -154,7 +154,7 @@ const AddMarks = () => {
         return;
       }
 
-      const response = await fetch('http://api.enhc.tech/api/marks/bulk', {
+      const response = await fetch('https://api.enhc.tech/api/marks/bulk', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

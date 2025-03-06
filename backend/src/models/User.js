@@ -77,6 +77,7 @@ const userSchema = new mongoose_1.default.Schema({
     standard: { type: String, required: true },
     age: { type: String, required: true },
     interests: { type: String, required: true },
+    isAdmin: { type: Boolean, default: false },
     academicInfo: { type: String, required: true },
     status: {
         type: String,

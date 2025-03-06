@@ -20,10 +20,13 @@ mongoose_1.default.connect(process.env.MONGO_URI)
 // Middleware
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use('/api', marksRoutes_1.default);
+app.use('/api/marks', marksRoutes_1.default); // This is correct
 // Routes
 app.use('/api/auth', authRoutes_1.default);
 app.use('/api/questionnaire', questionnaireRoutes_1.default);
+app.get('/', (req, res) => {
+    res.send('Server is running');
+});
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

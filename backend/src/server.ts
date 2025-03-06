@@ -19,16 +19,12 @@ mongoose.connect(process.env.MONGO_URI!)
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/api/marks', marksRoutes); // This is correct
+app.use('/api', marksRoutes);
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/questionnaire', questionnaireRoutes);
 
-
-app.get('/', (req, res) => {
-    res.send('Server is running');
-  });
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
